@@ -1,5 +1,5 @@
 /*
-    File: window.C
+    File: game.H
 
     Author: M. Hakimi
             Department of Computer Science
@@ -11,25 +11,31 @@
 /* DEFINES */
 /*--------------------------------------------------------------------------*/
 
-    /* -- (none) -- */
+#ifndef _GAME_
+#define _GAME_
 
 /*--------------------------------------------------------------------------*/
 /* INCLUDES */
 /*--------------------------------------------------------------------------*/
 #include "window.h"
+#include "snake.h"
 
-/*--------------------------------------------------------------------------*/
-/* CONSTRUCTOR */
-/*--------------------------------------------------------------------------*/
-Window::Window(int argc, char** argv, char title[]) {
-    // Set private members
-    this->title = *title;
+class Game {
+    public:
+        Game(int argc, char** argv, char title[]); // Constructor
 
-    // Start OpenGL
-    glutInit(&argc, argv);
+        /* Member Functions */
+        void display();
+        void initGL();
+        void reshape(GLsizei width, GLsizei height);
 
-    // Creates the Window (Set Size)
-    glutInitWindowSize(600, 600);
-    glutCreateWindow(title);
+    private:
+        Window w;
+        /* Snake Object */
+        Snake s;
 
-}
+        float map_half_length = 30.0f;
+
+};
+
+#endif

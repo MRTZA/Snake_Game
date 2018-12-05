@@ -1,5 +1,5 @@
 /*
-    File: window.C
+    File: snake.C
 
     Author: M. Hakimi
             Department of Computer Science
@@ -16,20 +16,43 @@
 /*--------------------------------------------------------------------------*/
 /* INCLUDES */
 /*--------------------------------------------------------------------------*/
-#include "window.h"
+#include "snake.h"
 
 /*--------------------------------------------------------------------------*/
-/* CONSTRUCTOR */
+/* CONSTRUCTOR/DESTRUCTOR */
 /*--------------------------------------------------------------------------*/
-Window::Window(int argc, char** argv, char title[]) {
-    // Set private members
-    this->title = *title;
+Snake::Snake() {
+    /* -- Do nothing all default values are set already -- */
+}
 
-    // Start OpenGL
-    glutInit(&argc, argv);
+/*--------------------------------------------------------------------------*/
+/* MEMBER FUNCTIONS */
+/*--------------------------------------------------------------------------*/
 
-    // Creates the Window (Set Size)
-    glutInitWindowSize(600, 600);
-    glutCreateWindow(title);
+/**
+ * Render the food block on the grid
+ */
+void spawnFood() {
 
+}
+
+/**
+ * Update snake's position based on user input
+ */
+void moveSnake(int newDirection) {
+
+}
+
+/**
+ * Handle keyboard input
+ */
+void keyboard(int key, int x, int y) {
+
+}
+
+/**
+ * Update snake's position w/o user input
+ */
+void moveSnakeAuto(int value) {
+    
 }
