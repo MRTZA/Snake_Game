@@ -32,9 +32,12 @@
 
 // Include our Classes
 #include "window.h"
+#include "game.h"
 
 int main(int argc, char** argv) {
     char title[] = "Snake Game"; // Title for Window
+
+    Game g = Game(argc, argv, title);
 
     // Run OpenGL
     glutMainLoop();

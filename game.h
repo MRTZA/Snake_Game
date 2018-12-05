@@ -25,16 +25,14 @@ class Game {
         Game(int argc, char** argv, char title[]); // Constructor
 
         /* Member Functions */
-        void display();
+        // void display();
         void initGL();
-        void reshape(GLsizei width, GLsizei height);
+        // void reshape(GLsizei width, GLsizei height);
 
     private:
         Window w;
         /* Snake Object */
-        Snake s;
-
-        float map_half_length = 30.0f;
+        Snake s = Snake();
 
 };
 

@@ -27,8 +27,8 @@ Game::Game(int argc, char** argv, char title[]) {
     // initialize window
     w = Window(argc, argv, title);
 
-    glutDisplayFunc(this->display);
-    glutReshapeFunc(this->reshape);
+    glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
     glutSpecialFunc(s.keyboard);
     glutTimerFunc(s.getSpeed(), s.moveSnakeAuto, 0);
 
@@ -39,7 +39,7 @@ Game::Game(int argc, char** argv, char title[]) {
         std::deque<float> row;
 
         row.push_back(0.0f);
-        row.push_back((map_half_length + 2.0f + (initSize * 2)) - (a * 2));
+        row.push_back((s.getLength() + 2.0f + (initSize * 2)) - (a * 2));
 
         s.pushFront(row);
     }
@@ -57,7 +57,7 @@ Game::Game(int argc, char** argv, char title[]) {
 /**
  * Display the game board
  */
-void Game::display() {
+void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
@@ -94,6 +94,6 @@ void Game::initGL() {
 /**
  * Sets board unchangeble to avoid render issues
  */
-void Game::reshape(GLsizei width, GLsizei height) {
+void reshape(GLsizei width, GLsizei height) {
     glutReshapeWindow(600, 600);
 }

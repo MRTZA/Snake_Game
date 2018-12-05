@@ -31,22 +31,23 @@ class Snake {
         void spawnFood();
         void moveSnake(int newDirection);
         void keyboard(int key, int x, int y);
-        void moveSnakeAuto(int value);
+        void moveSnakeAuto();
         
         deque<deque<float>> getCords() { return part_cords; }
         int getSpeed() { return moveSpeed; }
+        float getLength() { return map_half_length; }
 
         void pushFront(deque<float> row) { return part_cords.push_front(row); }
 
     private:
         // Keyboard variables
-        const int up = 1;
-        const int down = 2;
-        const int left = 3;
-        const int right = 4;
+        const int UP = 1;
+        const int DOWN = 2;
+        const int LEFT = 3;
+        const int RIGHT = 4;
 
         // Movm't variables
-        int direction = down; // move down when starting
+        int direction = DOWN; // move down when starting
         int moveSpeed = 100;
         bool moved = false;
         deque<deque<float>> part_cords;
@@ -58,6 +59,8 @@ class Snake {
         // Growth variables
         int growthStage = 0;
         int growth = 2;
+
+        float map_half_length = 30.0f;
 
 };
 
