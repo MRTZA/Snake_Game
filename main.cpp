@@ -140,6 +140,7 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
+    // output();
     // draw the snake
     for(unsigned int a = 0; a < s.getCords().size(); a++){
         glLoadIdentity();
@@ -155,8 +156,6 @@ void display() {
     }
 
     s.spawnFood();
-
-    output();
 
     glutSwapBuffers();
 
