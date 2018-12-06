@@ -36,6 +36,9 @@ class Snake {
         deque<deque<float>> getCords() { return part_cords; }
         int getSpeed() { return moveSpeed; }
         float getLength() { return map_half_length; }
+        bool getMoved() { return moved; }
+        void setMoved(bool v) { moved = v; } 
+        int getDirection() { return direction; }
 
         void pushFront(deque<float> row) { return part_cords.push_front(row); }
 
@@ -48,7 +51,7 @@ class Snake {
 
         // Movm't variables
         int direction = DOWN; // move down when starting
-        int moveSpeed = 100;
+        int moveSpeed = 200; // larger = slower
         bool moved = false;
         deque<deque<float>> part_cords;
 

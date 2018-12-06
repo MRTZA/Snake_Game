@@ -29,6 +29,8 @@ class Game {
         void initGL();
         // void reshape(GLsizei width, GLsizei height);
 
+        Snake getSnake() { return s; }
+
     private:
         Window w;
         /* Snake Object */

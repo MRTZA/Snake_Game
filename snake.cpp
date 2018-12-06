@@ -37,11 +37,12 @@ void Snake::spawnFood() {
         while(true){
             bool collides = false;
 
-            // Produce a temporary random coordinate
+            // temp coordinate
             int temp_food_cords[2] = { food_cords[0] = 2 * (rand() % ((int) map_half_length + 1)) - (int) map_half_length,
                                         food_cords[1] = 2 * (rand() % ((int) map_half_length + 1)) - (int) map_half_length };
+            
 
-            // Does it collide with the snake?
+            // Checks for collision
             for(unsigned int a = 0; a < part_cords.size(); a++){
                 if(temp_food_cords[0] == part_cords[a][0] &&
                    temp_food_cords[1] == part_cords[a][1]){
@@ -49,7 +50,7 @@ void Snake::spawnFood() {
                 }
             }
 
-            // If it doesn't collide with the snake, then make it the real food coordinates
+            // Set coordinate if no collision
             if(collides == false){
                 food_cords[0] = temp_food_cords[0];
                 food_cords[1] = temp_food_cords[1];
@@ -83,7 +84,7 @@ void Snake::moveSnake(int newDirection) {
     std::deque<float> new_head = part_cords[last_part];
 
     if(direction == UP){
-        // Did we slither into ourself?
+        // Check for colliision (tail)
         for(unsigned int a = 0; a < part_cords.size(); a++){
             if(part_cords[0][0]        == part_cords[a][0] &&
                part_cords[0][1] + 2.0f == part_cords[a][1]){
@@ -91,12 +92,12 @@ void Snake::moveSnake(int newDirection) {
             }
         }
 
-        // Did we slither into a wall?
+        // Check for collision (wall)
         if(part_cords[0][1] == map_half_length){
             exit(0);
         }
 
-        // Did we get food?
+        // Check for collision (food)
         if(part_cords[0][0]        == food_cords[0] &&
            part_cords[0][1] + 2.0f == food_cords[1]){
             growthStage++;
@@ -105,7 +106,7 @@ void Snake::moveSnake(int newDirection) {
 
         new_head[1] = part_cords[0][1] + 2.0f;
     } else if(direction == DOWN){
-        // Did we slither into ourself?
+        // Check for colliision (tail)
         for(unsigned int a = 0; a < part_cords.size(); a++){
             if(part_cords[0][0]        == part_cords[a][0] &&
                part_cords[0][1] - 2.0f == part_cords[a][1]){
@@ -113,12 +114,12 @@ void Snake::moveSnake(int newDirection) {
             }
         }
 
-        // Did we slither into a wall?
+        // Check for colliision (wall)
         if(part_cords[0][1] == -map_half_length){
             exit(0);
         }
 
-        // Did we get food?
+        // Check for colliision (food)
         if(part_cords[0][0]        == food_cords[0] &&
            part_cords[0][1] - 2.0f == food_cords[1]){
             growthStage++;
@@ -131,7 +132,7 @@ void Snake::moveSnake(int newDirection) {
     }
 
     if(direction == LEFT){
-        // Did we slither into ourself?
+        // Check for colliision (tail)
         for(unsigned int a = 0; a < part_cords.size(); a++){
             if(part_cords[0][0] - 2.0f == part_cords[a][0] &&
                part_cords[0][1]        == part_cords[a][1]){
@@ -139,12 +140,12 @@ void Snake::moveSnake(int newDirection) {
             }
         }
 
-        // Did we slither into a wall?
+        // Check for colliision (wall)
         if(part_cords[0][0] == -map_half_length){
             exit(0);
         }
 
-        // Did we get food?
+        // Check for colliision (food)
         if(part_cords[0][0] - 2.0f == food_cords[0] &&
            part_cords[0][1]        == food_cords[1]){
             growthStage++;
@@ -153,7 +154,7 @@ void Snake::moveSnake(int newDirection) {
 
         new_head[0] = part_cords[0][0] - 2.0f;
     } else if(direction == RIGHT){
-        // Did we slither into ourself?
+        // Check for colliision (tail)
         for(unsigned int a = 0; a < part_cords.size(); a++){
             if(part_cords[0][0] + 2.0f == part_cords[a][0] &&
                part_cords[0][1]        == part_cords[a][1]){
@@ -161,12 +162,12 @@ void Snake::moveSnake(int newDirection) {
             }
         }
 
-        // Did we slither into a wall?
+        // Check for colliision (wall)
         if(part_cords[0][0] == map_half_length){
             exit(0);
         }
 
-        // Did we get food?
+        // Check for colliision (food)
         if(part_cords[0][0] + 2.0f == food_cords[0] &&
            part_cords[0][1]        == food_cords[1]){
             growthStage++;
@@ -238,26 +239,4 @@ void Snake::keyboard(int key, int x, int y) {
     }
 
     glutPostRedisplay();
-}
-
-/**
- * Update snake's position w/o user input
- */
-void Snake::moveSnakeAuto() {
-    if(!moved){
-
-        if(direction == UP){
-            moveSnake(UP);
-        } else if(direction == DOWN){
-            moveSnake(DOWN);
-        } else if(direction == LEFT){
-            moveSnake(LEFT);
-        } else if(direction == RIGHT){
-            moveSnake(RIGHT);
-        }
-    } else {
-        moved = false;
-    }
-
-    glutTimerFunc(this->moveSpeed, this->moveSnakeAuto, 0);
 }
